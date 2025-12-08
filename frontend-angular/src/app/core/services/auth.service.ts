@@ -52,8 +52,11 @@ export class AuthService {
     return this.http.post<AuthResponse>(`${environment.apiUrl}/auth/login`, credentials)
       .pipe(
         tap(response => {
+          console.log('Login response:', response);
           if (response.success && response.data) {
+            console.log('Setting auth data - Token:', !!response.data.token, 'User:', response.data.user?.email);
             this.setAuthData(response.data.token, response.data.user);
+            console.log('Auth data set. IsAuthenticated:', this.isAuthenticated);
           }
         })
       );
@@ -71,11 +74,15 @@ export class AuthService {
   }
 
   logout(): void {
+    console.log('Logout called - clearing all auth data');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
     this.tokenSubject.next(null);
     this.currentUserSubject.next(null);
-    this.router.navigate(['/login']);
+    console.log('Auth data cleared. IsAuthenticated:', this.isAuthenticated);
+    this.router.navigate(['/login']).then(() => {
+      console.log('Navigated to login page');
+    });
   }
 
   updateUser(userData: Partial<User>): void {
@@ -106,10 +113,12 @@ export class AuthService {
   }
 
   private setAuthData(token: string, user: User): void {
+    console.log('setAuthData called with:', { token: !!token, user: user?.email });
     localStorage.setItem('token', token);
     localStorage.setItem('user', JSON.stringify(user));
     this.tokenSubject.next(token);
     this.currentUserSubject.next(user);
+    console.log('Local storage updated. Token:', localStorage.getItem('token')?.substring(0, 20), 'User:', JSON.parse(localStorage.getItem('user') || '{}')?.email);
   }
 
   // Hydrate user state from backend profile
