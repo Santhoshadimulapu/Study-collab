@@ -19,17 +19,19 @@ import { RoomDetailComponent } from './pages/room-detail/room-detail.component';
 import { ClassChatComponent } from './pages/class-chat/class-chat.component';
 
 const routes: Routes = [
-  // Root redirect to login for unauthenticated users
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  // Root redirect - handled by guards
+  { path: '', redirectTo: '/app/dashboard', pathMatch: 'full' },
   
-  // Public routes
+  // Public routes (only accessible when not logged in)
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [GuestGuard]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [GuestGuard]
   },
   
   // Protected routes
