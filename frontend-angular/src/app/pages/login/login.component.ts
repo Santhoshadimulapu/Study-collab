@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   loading = false;
   hidePassword = true;
-  returnUrl = '/dashboard';
+  returnUrl = '/app/dashboard';
 
   constructor(
     private fb: FormBuilder,
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
     });
 
     // Get return url from route parameters or default to '/'
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/dashboard';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/app/dashboard';
   }
 
   get f() {
