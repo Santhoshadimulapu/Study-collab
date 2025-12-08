@@ -45,8 +45,8 @@ app.use(morgan('combined'));
 app.use(limiter);
 // CORS configuration - allow Angular dev server (4200) and optionally legacy 3000
 const allowedOrigins = [
-  process.env.CLIENT_URL || 'http://localhost:3000',
-  'http://localhost:4200'
+  process.env.CLIENT_URL || 'http://localhost:4200',
+  'https://study-collab-lake.vercel.app'
 ];
 // Debug helper to see incoming origins
 app.use((req, res, next) => {
