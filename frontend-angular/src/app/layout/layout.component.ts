@@ -24,25 +24,25 @@ export class LayoutComponent implements OnInit {
     {
       text: 'Dashboard',
       icon: 'dashboard',
-      path: '/dashboard',
+      path: '/app/dashboard',
       roles: ['admin', 'teacher', 'student']
     },
     {
       text: 'Manage Schedules',
       icon: 'calendar_today',
-      path: '/teacher-schedule',
+      path: '/app/teacher-schedule',
       roles: ['admin', 'teacher']
     },
     {
       text: 'Assignments',
       icon: 'assignment',
-      path: '/assignments',
+      path: '/app/assignments',
       roles: ['admin', 'teacher', 'student']
     },
     {
       text: 'Classrooms',
       icon: 'meeting_room',
-      path: '/rooms',
+      path: '/app/rooms',
       roles: ['admin', 'teacher', 'student']
     }
   ];
@@ -77,10 +77,11 @@ export class LayoutComponent implements OnInit {
   }
 
   logout(): void {
+    console.log('Logging out user');
     this.authService.logout();
   }
 
   navigateToProfile(): void {
-    this.router.navigate(['/profile']);
+    this.router.navigate(['/app/profile']);
   }
 }
