@@ -19,21 +19,22 @@ import { RoomDetailComponent } from './pages/room-detail/room-detail.component';
 import { ClassChatComponent } from './pages/class-chat/class-chat.component';
 
 const routes: Routes = [
+  // Root redirect to login for unauthenticated users
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  
   // Public routes
   {
     path: 'login',
-    component: LoginComponent,
-    canActivate: [GuestGuard]
+    component: LoginComponent
   },
   {
     path: 'register',
-    component: RegisterComponent,
-    canActivate: [GuestGuard]
+    component: RegisterComponent
   },
   
   // Protected routes
   {
-    path: '',
+    path: 'app',
     component: LayoutComponent,
     canActivate: [AuthGuard],
     children: [
@@ -42,15 +43,15 @@ const routes: Routes = [
       { path: 'teacher-schedule', component: TeacherScheduleManagerComponent },
       { path: 'assignments', component: AssignmentsComponent },
       { path: 'students', component: StudentsComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'rooms', component: RoomListComponent },
-  { path: 'rooms/:id', component: RoomDetailComponent }
-      ,{ path: 'class-chat/:id', component: ClassChatComponent }
+      { path: 'profile', component: ProfileComponent },
+      { path: 'rooms', component: RoomListComponent },
+      { path: 'rooms/:id', component: RoomDetailComponent },
+      { path: 'class-chat/:id', component: ClassChatComponent }
     ]
   },
   
-  // Fallback
-  { path: '**', redirectTo: 'dashboard' }
+  // Fallback to login
+  { path: '**', redirectTo: '/login' }
 ];
 
 @NgModule({
