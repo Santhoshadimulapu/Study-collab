@@ -56,7 +56,7 @@ export class RegisterComponent implements OnInit {
       next: (response) => {
         if (response.success) {
           this.toastr.success('Registration successful!', 'Success');
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/app/dashboard']);
         } else {
           this.toastr.error(response.message || 'Registration failed', 'Error');
         }
