@@ -16,13 +16,11 @@ export class GuestGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    // Allow access only if NOT authenticated
     if (!this.authService.isAuthenticated) {
       return true;
     }
 
     // Already logged in, redirect to dashboard
-    console.log('GuestGuard: User already authenticated, redirecting to dashboard');
     return this.router.createUrlTree(['/app/dashboard']);
   }
 }
