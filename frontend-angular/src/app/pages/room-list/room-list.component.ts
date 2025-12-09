@@ -67,8 +67,8 @@ export class RoomListComponent implements OnInit {
   load(): void { this.roomsApi.myRooms().subscribe(res => this.rooms = res.data?.rooms || []); }
   create(): void { if (this.createForm.invalid) return; this.roomsApi.create(this.createForm.value).subscribe(res => { this.toastr.success('Room created'); this.load(); }); }
   join(): void { if (this.joinForm.invalid) return; this.roomsApi.join(this.joinForm.value.code).subscribe(res => { this.toastr.success('Joined room'); this.load(); }); }
-  open(r:any){ this.router.navigate(['/rooms', r._id || r.id]); }
-  openChat(r:any){ this.router.navigate(['/class-chat', r._id || r.id]); }
+  open(r:any){ this.router.navigate(['/app/rooms', r._id || r.id]); }
+  openChat(r:any){ this.router.navigate(['/app/class-chat', r._id || r.id]); }
   
   deleteRoom(r: any): void {
     if (confirm('Are you sure you want to delete this room? This action cannot be undone.')) {
